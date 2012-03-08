@@ -40,12 +40,32 @@
                 if (effect.options.reset) {
                   if (typeof oldValue == 'undefined' || field.val() != effect.options.value) {
                     oldValue = field.val();
+                  }                
+                  var valuetoset = (effect.effect == 'fill' ? e.value : !e.value) ? oldValue : effect.options.value;                    
+                  if ($(field).is(":radio")) {
+                    $(field).each(function(){
+                      if ($(this).val() == valuetoset) {
+                        $(this).attr("checked","checked").trigger({ type: 'state:value', value: valuetoset, oldValue: oldValue });
+                      } 
+;
+                    });
                   }
-                  field.val((effect.effect == 'fill' ? e.value : !e.value) ? oldValue : effect.options.value);
+                  else {
+                    field.val(valuetoset);
+                  }
                 }
                 else {
                   if (effect.effect == 'fill' && !e.value || effect.effect == 'empty' && e.value) {
-                    field.val(effect.options.value);
+                    if ($(field).is(":radio")) {
+                      $(field).each(function(){
+                        if ($(this).val() == effect.options.value) {
+                          $(this).attr("checked","checked").trigger({ type: 'state:value', value: valuetoset });
+                        }
+                      });
+                    }
+                    else {
+                      field.val(effect.options.value);
+                    }
                   }
                 }
               }
