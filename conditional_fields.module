@@ -222,10 +222,10 @@ function conditional_fields_element_after_build($element, &$form_state) {
   if (isset($element['#field_name'])) {
     $field = $element;
   }
-  elseif (isset($element['#language'], $element[$element['#language']], $element[$element['#language']]['#field_name'])) {
-    // Some fields are wrapped in containers before processing.
-    $field = $element[$element['#language']];
-  }
+  // elseif (isset($element['#language'], $element[$element['#language']], $element[$element['#language']]['#field_name'])) {
+  //   // Some fields are wrapped in containers before processing.
+  //   $field = $element[$element['#language']];
+  // }
   else {
     return $element;
   }
